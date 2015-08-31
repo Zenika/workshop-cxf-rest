@@ -16,3 +16,5 @@ target
 *.vrb
 *.vrb~
 *.iml
+pom.xml~
+.idea
