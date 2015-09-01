@@ -112,8 +112,8 @@
         <module>cxf-content-negociation-solution</module>
         <module>cxf-rest-documentation-start</module>
         <module>cxf-rest-documentation-solution</module>
+        <module>cxf-hateoas-start</module>
         <module>cxf-hateoas-solution</module>
-        
     </modules>
 </project>
 
