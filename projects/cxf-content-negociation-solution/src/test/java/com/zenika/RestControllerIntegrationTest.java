@@ -1,32 +1,31 @@
 package com.zenika;
 
-import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
-import com.fasterxml.jackson.jaxrs.xml.JacksonJaxbXMLProvider;
-import com.zenika.model.Contact;
-import org.apache.cxf.jaxrs.client.WebClient;
-import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
+
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.ws.rs.client.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import java.util.Arrays;
-
-import static org.junit.Assert.assertEquals;
+import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
+import com.fasterxml.jackson.jaxrs.xml.JacksonJaxbXMLProvider;
+import com.zenika.model.Contact;
 
 /**
  * 
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = RestApplication.class)
+@SpringApplicationConfiguration(classes = ContentNegociationApplication.class)
 @WebIntegrationTest
 public class RestControllerIntegrationTest {
 
-    Client client = ClientBuilder.newBuilder()
+    Client client = ClientBuilder
             .newClient()
             .register(new JacksonJaxbJsonProvider())
             .register(new JacksonJaxbXMLProvider());

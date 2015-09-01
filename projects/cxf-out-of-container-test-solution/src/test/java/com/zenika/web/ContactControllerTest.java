@@ -1,10 +1,21 @@
 package com.zenika.web;
 
-import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
-import com.jayway.jsonassert.JsonAssert;
-import com.zenika.model.Contact;
-import com.zenika.repository.ContactRepository;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
+import javax.ws.rs.Path;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
 import org.apache.cxf.endpoint.Server;
+import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.cxf.jaxrs.lifecycle.ResourceProvider;
@@ -25,16 +36,10 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.ws.rs.Path;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.*;
+import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
+import com.jayway.jsonassert.JsonAssert;
+import com.zenika.model.Contact;
+import com.zenika.repository.ContactRepository;
 
 /**
  * Created by acogoluegnes on 28/08/15.
@@ -94,7 +99,7 @@ public class ContactControllerTest {
                 .get();
 
         assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
-
+        
         JsonAssert.with(response.getEntity().toString())
                 .assertEquals("$[0].id", 1)
                 .assertEquals("$[0].firstname", "John")
@@ -148,6 +153,8 @@ public class ContactControllerTest {
         Response response = client.path("/contacts/{id}",id)
                 .delete();
 
+        assertEquals(Response.Status.NO_CONTENT.getStatusCode(), response.getStatus());
+        
         verify(repo).delete(id);
     }
 
@@ -176,10 +183,10 @@ public class ContactControllerTest {
             }
             if (resourceProviders.size() > 0) {
                 JAXRSServerFactoryBean factory = new JAXRSServerFactoryBean();
-                //factory.setBus(ctx.getBean(SpringBus.class));
                 factory.setProviders(Arrays.asList(new JacksonJsonProvider()));
                 factory.setResourceProviders(resourceProviders);
                 factory.setAddress(ENDPOINT_ADDRESS);
+                factory.getBus().getOutInterceptors().add(new LoggingOutInterceptor());
                 return factory.create();
             } else {
                 return null;

@@ -22,7 +22,7 @@ public class HelloWordApplicationTest {
 
     @Test
     public void helloWorldTest() {
-        Client client = ClientBuilder.newBuilder().newClient();
+        Client client = ClientBuilder.newClient();
         WebTarget target = client.target("http://localhost:8080/hello");
         Invocation.Builder builder = target.request();
         String message = builder.get(String.class);

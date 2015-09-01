@@ -3,6 +3,7 @@ package com.zenika;
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import org.apache.cxf.bus.spring.SpringBus;
 import org.apache.cxf.endpoint.Server;
+import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
 import org.apache.cxf.jaxrs.lifecycle.ResourceProvider;
 import org.apache.cxf.jaxrs.spring.SpringResourceFactory;
@@ -21,7 +22,7 @@ import java.util.List;
  *
  */
 @Configuration
-public class RestConfiguration {
+public class HateoasConfiguration {
 
     @Bean
     public ServletRegistrationBean servlet() {
@@ -32,7 +33,9 @@ public class RestConfiguration {
 
 
     @Bean public SpringBus cxf() {
-        return new SpringBus();
+        SpringBus bus = new SpringBus();
+        bus.setInInterceptors(Arrays.asList(new LoggingInInterceptor()));
+        return bus;
     }
 
     @Bean

@@ -1,21 +1,22 @@
 package com.zenika;
 
-import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
-import com.zenika.model.Contact;
-import org.apache.cxf.jaxrs.client.WebClient;
-import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
+
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.ws.rs.client.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import java.util.Arrays;
-
-import static org.junit.Assert.assertEquals;
+import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
+import com.zenika.model.Contact;
 
 /**
  * 
@@ -25,8 +26,7 @@ import static org.junit.Assert.assertEquals;
 @WebIntegrationTest
 public class RestControllerIntegrationTest {
 
-    Client client = ClientBuilder.newBuilder()
-            .newClient()
+    Client client = ClientBuilder.newClient()
             .register(new JacksonJaxbJsonProvider());
 
     WebTarget target = client.target("http://localhost:8080");

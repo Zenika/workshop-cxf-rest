@@ -1,10 +1,8 @@
 package com.zenika;
 
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
-import com.fasterxml.jackson.jaxrs.xml.JacksonXMLProvider;
 import org.apache.cxf.bus.spring.SpringBus;
 import org.apache.cxf.endpoint.Server;
-import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
 import org.apache.cxf.jaxrs.lifecycle.ResourceProvider;
 import org.apache.cxf.jaxrs.spring.SpringResourceFactory;
@@ -23,7 +21,7 @@ import java.util.List;
  *
  */
 @Configuration
-public class RestConfiguration {
+public class HateoasConfiguration {
 
     @Bean
     public ServletRegistrationBean servlet() {
@@ -34,9 +32,7 @@ public class RestConfiguration {
 
 
     @Bean public SpringBus cxf() {
-        SpringBus bus = new SpringBus();
-        bus.setInInterceptors(Arrays.asList(new LoggingInInterceptor()));
-        return bus;
+        return new SpringBus();
     }
 
     @Bean
@@ -52,7 +48,7 @@ public class RestConfiguration {
         if (resourceProviders.size() > 0) {
             JAXRSServerFactoryBean factory = new JAXRSServerFactoryBean();
             factory.setBus(ctx.getBean(SpringBus.class));
-            factory.setProviders(Arrays.asList(new JacksonJsonProvider(),new JacksonXMLProvider()));
+            factory.setProviders(Arrays.asList(new JacksonJsonProvider()));
             factory.setResourceProviders(resourceProviders);
             return factory.create();
         } else {

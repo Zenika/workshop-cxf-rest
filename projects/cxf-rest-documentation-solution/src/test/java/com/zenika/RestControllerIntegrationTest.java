@@ -1,37 +1,38 @@
 package com.zenika;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
-import com.jayway.jsonpath.JsonPath;
-import com.zenika.model.Contact;
-import org.apache.cxf.jaxrs.client.WebClient;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
 import org.hamcrest.Matchers;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.ws.rs.client.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
+import com.zenika.model.Contact;
 
 /**
  * 
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = RestApplication.class)
+@SpringApplicationConfiguration(classes = RestDocumentationApplication.class)
 @WebIntegrationTest
 public class RestControllerIntegrationTest {
 
-    Client client = ClientBuilder.newBuilder()
+    Client client = ClientBuilder
             .newClient()
             .register(new JacksonJaxbJsonProvider());
 
@@ -100,7 +101,6 @@ public class RestControllerIntegrationTest {
         for (JsonNode api : apiDocumentation.get("apis")) {
             apis.add(api.get("path").asText());
         }
-        System.out.println(apis);
         assertThat(apis, Matchers.containsInAnyOrder(apiPath, apiPath + "/{id}"));
     }
 
