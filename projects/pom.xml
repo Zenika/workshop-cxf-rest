@@ -102,6 +102,7 @@
     </properties>
 
     <modules>
+    	<module>cxf-rest-hello-world-start</module>
         <module>cxf-rest-hello-world-solution</module>
         <module>cxf-rest-solution</module>
         <module>cxf-out-of-container-test-solution</module>
