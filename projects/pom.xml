@@ -106,6 +106,7 @@
         <module>cxf-rest-hello-world-solution</module>
         <module>cxf-rest-start</module>
         <module>cxf-rest-solution</module>
+        <module>cxf-out-of-container-test-start</module>
         <module>cxf-out-of-container-test-solution</module>
         <module>cxf-content-negociation-solution</module>
         <module>cxf-hateoas-solution</module>

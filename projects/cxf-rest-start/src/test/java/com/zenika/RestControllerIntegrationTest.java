@@ -98,6 +98,8 @@ public class RestControllerIntegrationTest {
 
         // TODO Bonus 29 tenter de récupérer le contact et vérifier que l'on récupère une 404
         // (ce contact n'existe plus, puisque nous l'avons créé puis supprimer)
+        
+        // TODO 30 lancer le test. Il doit passer.
     }
 
 }
