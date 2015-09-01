@@ -19,7 +19,7 @@ import java.util.List;
  */
 @Path("/contacts")
 @Service
-@Api(value = "/contacts",description = "Gestion des contacts")
+// TODO 02 Ajouter l'annotation de documentation pour la classe
 public class ContactController {
 
     @Autowired
@@ -27,10 +27,8 @@ public class ContactController {
 
     @GET
     @Path("/{id}")
-    @ApiOperation(
-            value = "Récupère un contact par son identifiant",
-            response = Contact.class
-    )
+    // TODO 03 Ajouter l'annotation de documentation pour la méthode contact
+    // renseigner les attributs value et response
     @Produces(MediaType.APPLICATION_JSON)
     public Response contact(@PathParam("id") Long id) {
         Contact contact = contactRepository.findOne(id);
@@ -41,20 +39,15 @@ public class ContactController {
         }
     }
 
+    // TODO 07 Documenter toutes les méthodes ci-dessous avec @ApiOperation
+    
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @ApiOperation(
-            value = "Récupère l'ensemble des contacts",
-            response = Contact[].class
-    )
     public List<Contact> contacts() {
         return contactRepository.findAll();
     }
 
     @POST
-    @ApiOperation(
-            value = "Crée un contact"
-    )
     @Consumes(MediaType.APPLICATION_JSON)
     public Response create(Contact contact,@Context UriInfo uriInfo) {
         contact = contactRepository.save(contact);
@@ -65,9 +58,6 @@ public class ContactController {
 
     @PUT
     @Path("/{id}")
-    @ApiOperation(
-            value = "Met à jour un contact"
-    )
     @Consumes(MediaType.APPLICATION_JSON)
     public Response update(Contact contact) {
         contactRepository.save(contact);
@@ -76,9 +66,6 @@ public class ContactController {
 
     @DELETE
     @Path("/{id}")
-    @ApiOperation(
-            value = "Supprimer un contact."
-    )
     public Response delete(@PathParam("id") Long id) {
         contactRepository.delete(id);
         return Response.noContent().build();

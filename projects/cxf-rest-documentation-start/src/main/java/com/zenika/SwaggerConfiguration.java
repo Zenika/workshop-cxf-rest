@@ -11,7 +11,8 @@ import org.springframework.context.annotation.Configuration;
 /**
  *
  */
-@Configuration
+// TODO 01 Décommenter la ligne ci-dessous pour activer Swagger
+//@Configuration
 public class SwaggerConfiguration {
 
     @Bean public ResourceListingProvider resourceListingProvider() {

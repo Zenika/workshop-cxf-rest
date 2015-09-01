@@ -13,6 +13,7 @@ import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
 import org.apache.cxf.jaxrs.lifecycle.ResourceProvider;
 import org.apache.cxf.jaxrs.spring.SpringResourceFactory;
 import org.apache.cxf.transport.servlet.CXFServlet;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.embedded.ServletRegistrationBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -40,8 +41,11 @@ public class RestDocumentationConfiguration {
         return bus;
     }
 
+    @Autowired(required=false)
+    List<MessageBodyWriter<?>> providers;
+    
     @Bean
-    public Server jaxRsServer(ApplicationContext ctx,List<MessageBodyWriter<?>> providers) {
+    public Server jaxRsServer(ApplicationContext ctx) {
         List<ResourceProvider> resourceProviders = new LinkedList<ResourceProvider>();
         for (String beanName : ctx.getBeanDefinitionNames()) {
             if (ctx.findAnnotationOnBean(beanName, Path.class) != null) {
@@ -55,7 +59,9 @@ public class RestDocumentationConfiguration {
             factory.setBus(ctx.getBean(SpringBus.class));
             List<Object> allProviders = new ArrayList<>();
             allProviders.add(new JacksonJsonProvider());
-            allProviders.addAll(providers);
+            if(providers != null) {
+            	allProviders.addAll(providers);
+            }
             factory.setProviders(allProviders);
             factory.setResourceProviders(resourceProviders);
             return factory.create();

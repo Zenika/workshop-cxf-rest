@@ -14,6 +14,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.hamcrest.Matchers;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -86,6 +87,7 @@ public class RestControllerIntegrationTest {
         assertEquals(Response.Status.NOT_FOUND.getStatusCode(),responseGet.getStatus());
     }
 
+    @Ignore
     @Test public void swaggerTest() {
         WebTarget swaggerTarget = client.target("http://localhost:8080/app/api-docs");
         JsonNode documentation = swaggerTarget.request().get(JsonNode.class);
