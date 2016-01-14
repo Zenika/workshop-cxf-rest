@@ -7,7 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *
  */
 @SpringBootApplication
-public class RestDocumentationApplication {
+public class
+RestDocumentationApplication {
 	
 	// TODO 04 Lancer l'application et aller sur http://localhost:8080/app/api-docs
 	// avec un navigateur. La description du service doit apparaître.
@@ -51,8 +52,6 @@ public class RestDocumentationApplication {
 	// TODO 14 Utiliser Swagger UI pour consulter le contact créé
 	
 	// TODO 15 Utiliser Swagger UI pour supprimer le contact créé
-	
-	// TODO 14 Analyser 
 	
     public static void main(String[] args) {
         SpringApplication.run(RestDocumentationApplication.class, args);

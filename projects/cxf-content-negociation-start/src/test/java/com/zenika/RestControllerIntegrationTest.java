@@ -37,7 +37,7 @@ public class RestControllerIntegrationTest {
 
     @Test
     public void contentNegociation() {
-    	// TODO 02 Positionner l'entête Accept à application JSON pour les 2 requêtes ci-dessous
+    	// TODO 02 Positionner l'entête Accept à application/json pour les 2 requêtes ci-dessous
         Contact[] contacts = target.path("/contacts").request().get(Contact[].class);
         assertEquals(12, contacts.length);
         Long id = contacts[0].getId();

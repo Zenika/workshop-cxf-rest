@@ -70,7 +70,7 @@ public class RestControllerIntegrationTest {
         // TODO 16 lancer le test. Il doit passer.
         
         // TODO 17 récupérer le contact nouvellement créé
-        // (grâche à son URI dans la réponse au POST, utiliser client pour positionner contactTarget)
+        // (grâce à son URI dans la réponse au POST, utiliser client pour positionner contactTarget)
         // assigner le contact récupéré à la variable ci-dessous
         
         WebTarget contactTarget = null; // = client.target(response.getLocation());
@@ -96,10 +96,10 @@ public class RestControllerIntegrationTest {
         
         // TODO 27 s'assurer que le compte de contact est bon (revenu à initialCount)
 
-        // TODO Bonus 29 tenter de récupérer le contact et vérifier que l'on récupère une 404
+        // TODO 29 (Bonus) tenter de récupérer le contact et vérifier que l'on récupère une 404
         // (ce contact n'existe plus, puisque nous l'avons créé puis supprimer)
         
-        // TODO 30 lancer le test. Il doit passer.
+        // TODO 30 (Bonus) lancer le test. Il doit passer.
     }
 
 }
