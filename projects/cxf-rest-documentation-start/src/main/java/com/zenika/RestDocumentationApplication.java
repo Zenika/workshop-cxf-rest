@@ -7,8 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *
  */
 @SpringBootApplication
-public class
-RestDocumentationApplication {
+public class RestDocumentationApplication {
 	
 	// TODO 04 Lancer l'application et aller sur http://localhost:8080/app/api-docs
 	// avec un navigateur. La description du service doit apparaître.
